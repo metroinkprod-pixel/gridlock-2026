@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gridlock 2026 — Schedule</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0d1a2e;
+    color: #e8edf5;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    min-height: 100vh;
+  }
+
+  .hero {
+    background: linear-gradient(180deg, #0a1628 0%, #0d1a2e 100%);
+    border-bottom: 2px solid #00b4e6;
+    padding: 2.5rem 1.25rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 40px,
+      rgba(0,180,230,0.03) 40px,
+      rgba(0,180,230,0.03) 41px
+    );
+    pointer-events: none;
+  }
+
+  .logo-wrap {
+    position: relative;
+    z-index: 1;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 1.25rem;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #00b4e6;
+    box-shadow: 0 0 24px rgba(0,180,230,0.25);
+  }
+
+  .logo-wrap img { width: 100%; height: 100%; object-fit: cover; }
+
+  .event-name {
+    position: relative;
+    z-index: 1;
+    font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: #ffffff;
+    line-height: 1.1;
+  }
+
+  .event-name span {
+    color: #f5c518;
+    display: inline;
+  }
+
+  .event-meta {
+    position: relative;
+    z-index: 1;
+    margin-top: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    align-items: center;
+  }
+
+  .meta-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    color: #a8bdd4;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(0,180,230,0.2);
+    border-radius: 99px;
+    padding: 4px 14px;
+  }
+
+  .meta-pill svg { width: 13px; height: 13px; flex-shrink: 0; color: #00b4e6; }
+
+  .notice {
+    background: rgba(245,197,24,0.08);
+    border: 1px solid rgba(245,197,24,0.25);
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    margin: 1.25rem 1.25rem 0;
+    font-size: 0.78rem;
+    color: #f5c518;
+    text-align: center;
+  }
+
+  .schedule { padding: 1.5rem 1.25rem 3rem; max-width: 520px; margin: 0 auto; }
+
+  .day-block { margin-bottom: 2rem; }
+
+  .day-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #00b4e6;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(0,180,230,0.2);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .day-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(0,180,230,0.15);
+  }
+
+  .item {
+    display: flex;
+    gap: 12px;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    align-items: flex-start;
+  }
+
+  .item:last-child { border-bottom: none; }
+
+  .time-col {
+    min-width: 100px;
+    font-size: 0.78rem;
+    color: #7a9ab8;
+    padding-top: 3px;
+    line-height: 1.4;
+    white-space: nowrap;
+  }
+
+  .time-col .end-time { display: block; font-size: 0.72rem; color: #4e6a84; }
+
+  .item-info { flex: 1; }
+
+  .item-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #e8edf5;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    line-height: 1.3;
+  }
+
+  .item-sub {
+    font-size: 0.78rem;
+    color: #7a9ab8;
+    margin-top: 2px;
+  }
+
+  .tag {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  .tag-main   { background: rgba(0,180,230,0.15); color: #00b4e6; border: 1px solid rgba(0,180,230,0.3); }
+  .tag-side   { background: rgba(245,197,24,0.12); color: #f5c518; border: 1px solid rgba(245,197,24,0.3); }
+  .tag-social { background: rgba(130,90,200,0.15); color: #b07ef5; border: 1px solid rgba(130,90,200,0.3); }
+  .tag-wrap   { background: rgba(255,255,255,0.06); color: #7a9ab8; border: 1px solid rgba(255,255,255,0.1); }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-top: 5px;
+    flex-shrink: 0;
+  }
+  .dot-main   { background: #00b4e6; box-shadow: 0 0 6px rgba(0,180,230,0.5); }
+  .dot-side   { background: #f5c518; box-shadow: 0 0 6px rgba(245,197,24,0.4); }
+  .dot-social { background: #b07ef5; }
+  .dot-wrap   { background: #4e6a84; }
+
+  .footer {
+    text-align: center;
+    padding: 1.5rem 1.25rem;
+    border-top: 1px solid rgba(0,180,230,0.15);
+    font-size: 0.75rem;
+    color: #4e6a84;
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="logo-wrap">
+    <img src="NintendoGridlock.png" alt="Gridlock logo">
+  </div>
+  <h1 class="event-name">GRID<span>LOCK</span> 2026</h1>
+  <div class="event-meta">
+    <div class="meta-pill">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      July 11–12, 2026
+    </div>
+    <div class="meta-pill">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      OSNYC, Chinatown, New York
+    </div>
+  </div>
+</div>
+
+<div class="notice">
+  ⚠ Schedule subject to change — check back for updates
+</div>
+
+<div class="schedule">
+
+  <div class="day-block">
+    <div class="day-label">Day 1 &mdash; Saturday, July 11</div>
+
+    <div class="item">
+      <div class="dot dot-wrap"></div>
+      <div class="time-col">11:00 AM<span class="end-time">→ 11:30 AM</span></div>
+      <div class="item-info">
+        <div class="item-name">Doors Open</div>
+        <div class="item-sub">General entry & venue exploration</div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="dot dot-main"></div>
+      <div class="time-col">11:30 AM<span class="end-time">→ 12:00 PM</span></div>
+      <div class="item-info">
+        <div class="item-name">Wave A Check-in <span class="tag tag-main">Main event</span></div>
+        <div class="item-sub">Team registration & station assignment</div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="dot dot-main"></div>
+      <div class="time-col">12:00 PM<span class="end-time">→ 2:00 PM</span></div>
+      <div class="item-info">
+        <div class="item-name">Wave A <span class="tag tag-main">Main event</span></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="dot dot-main"></div>
+      <div class="time-col">2:00 PM<span class="end-time">→ 4:00 PM</span></div>
+      <div class="item-info">
+        <div class="item-name">Wave B <span class="tag tag-main">Main event</span></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="dot dot-main"></div>
+      <div class="time-col">4:00 PM<span class="end-time">→ 6:00 PM</span></div>
+      <div class="item-info">
+        <div class="item-name">Wave C <span class="tag tag-main">Main event</span></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="dot dot-main"></div>
+      <div class="time-col">6:00 PM<span class="end-time">→ 8:00 PM</span></div>
+      <div class="item-info">
+        <div class="item-name">Wave D <span class="tag tag-main">Main event</span></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="dot dot-side"></div>
+      <div class="time-col">8:00 PM<span class="end-time">→ 9:00 PM</span></div>
+      <div class="item-info">
+        <div class="item-name">Side Event 1 <span class="tag tag-side">Side event</span></div>
+        <div class="item-sub">TBD</div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="dot dot-social"></div>
+      <div class="time-col">9:00 PM<span class="end-time">→ 10:30 PM</span></div>
+      <div class="item-info">
+        <div class="item-name">Karaoke <span class="tag tag-social">Social</span></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="dot dot-wrap"></div>
+      <div class="time-col">10:30 PM</div>
+      <div class="item-info">
+        <div class="item-name">Day 1 Wrap-up <span class="tag tag-wrap">End of day</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="day-block">
+    <div class="day-label">Day 2 &mdash; Sunday, July 12</div>
+
+    <div class="item">
+      <div class="dot dot-wrap"></div>
+      <div class="time-col">11:00 AM<span class="end-time">→ 12:00 PM</span></div>
+      <div class="item-info">
+        <div class="item-name">Doors Open</div>
+        <div class="item-sub">General entry</div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="dot dot-main"></div>
+      <div class="time-col">12:00 PM<span class="end-time">→ 3:00 PM</span></div>
+      <div class="item-info">
+        <div class="item-name">Bronze & Silver Bracket <span class="tag tag-main">Main event</span></div>
+        <div class="item-sub">Both brackets running simultaneously</div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="dot dot-main"></div>
+      <div class="time-col">3:00 PM<span class="end-time">→ 5:00 PM</span></div>
+      <div class="item-info">
+        <div class="item-name">Redemption Bracket <span class="tag tag-main">Main event</span></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="dot dot-main"></div>
+      <div class="time-col">5:00 PM<span class="end-time">→ 8:00 PM</span></div>
+      <div class="item-info">
+        <div class="item-name">Top Cut <span class="tag tag-main">Main event</span></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="dot dot-main"></div>
+      <div class="time-col">8:00 PM<span class="end-time">→ 9:00 PM</span></div>
+      <div class="item-info">
+        <div class="item-name">Grand Finals <span class="tag tag-main">Main event</span></div>
+        <div class="item-sub">Main stage</div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="dot dot-wrap"></div>
+      <div class="time-col">9:00 PM</div>
+      <div class="item-info">
+        <div class="item-name">Medal Ceremony & Wrap-up <span class="tag tag-wrap">End of day</span></div>
+        <div class="item-sub">Awards, prizes, closing remarks</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  Schedule subject to change · Gridlock 2026 · OSNYC, Chinatown NY
+</div>
+
+</body>
+</html>
