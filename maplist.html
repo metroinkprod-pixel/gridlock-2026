@@ -83,7 +83,6 @@
 
   .meta-pill svg { width: 13px; height: 13px; flex-shrink: 0; color: #00b4e6; }
 
-  /* Nav */
   .subnav {
     position: relative;
     z-index: 1;
@@ -120,18 +119,6 @@
     color: #e8edf5;
   }
 
-  .notice {
-    background: rgba(245,197,24,0.08);
-    border: 1px solid rgba(245,197,24,0.25);
-    border-radius: 8px;
-    padding: 0.6rem 1rem;
-    margin: 1.25rem 1.25rem 0;
-    font-size: 0.78rem;
-    color: #f5c518;
-    text-align: center;
-  }
-
-  /* Stage Tabs */
   .stage-tabs {
     display: flex;
     gap: 0.4rem;
@@ -177,7 +164,6 @@
 
   .content { padding: 1.5rem 1.25rem 3rem; max-width: 560px; margin: 0 auto; }
 
-  /* Stage grouping */
   .stage-block { margin-bottom: 2.5rem; display: none; }
   .stage-block.visible { display: block; }
 
@@ -187,12 +173,23 @@
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: #f5c518;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
     padding-bottom: 0.6rem;
     border-bottom: 2px solid rgba(245,197,24,0.3);
     display: flex;
     align-items: center;
     gap: 8px;
+  }
+
+  .stage-desc {
+    font-size: 0.8rem;
+    line-height: 1.5;
+    color: #a8bdd4;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(0,180,230,0.15);
+    border-radius: 8px;
+    padding: 0.7rem 0.9rem;
+    margin-bottom: 1.25rem;
   }
 
   .round-block { margin-bottom: 1.5rem; }
@@ -323,9 +320,10 @@
   <!-- GROUP STAGE -->
   <div class="stage-block visible" data-stage="group">
     <div class="stage-label">Group Stage (Wave A and B) </div>
+    <div class="stage-desc">[Round Robin Group Rules: 1st Place -> Championship Bracket (Day 2), 2nd & 3rd -> Redemption Bracket (Day 2) , Remaining teams -> Silver Bracket(Day 1)]</div>
 
     <div class="round-block">
-      <div class="round-label">Groups Round 1 <span class="bo-tag">Bo5</span></div>
+      <div class="round-label">Round 1 <span class="bo-tag">Bo5</span></div>
       <div class="match"><div class="game-num">1</div><div class="match-info"><span class="mode-tag mode-sz">SZ</span><span class="map-name">Bluefin Depot</span></div></div>
       <div class="match"><div class="game-num">2</div><div class="match-info"><span class="mode-tag mode-cb">CB</span><span class="map-name">Shipshape Cargo Co.</span></div></div>
       <div class="match"><div class="game-num">3</div><div class="match-info"><span class="mode-tag mode-tc">TC</span><span class="map-name">Inkblot Art Academy</span></div></div>
@@ -334,7 +332,7 @@
     </div>
 
     <div class="round-block">
-      <div class="round-label">Groups Round 2 <span class="bo-tag">Bo5</span></div>
+      <div class="round-label">Round 2 <span class="bo-tag">Bo5</span></div>
       <div class="match"><div class="game-num">1</div><div class="match-info"><span class="mode-tag mode-cb">CB</span><span class="map-name">Barnacle & Dime</span></div></div>
       <div class="match"><div class="game-num">2</div><div class="match-info"><span class="mode-tag mode-tc">TC</span><span class="map-name">Hagglefish Market</span></div></div>
       <div class="match"><div class="game-num">3</div><div class="match-info"><span class="mode-tag mode-rm">RM</span><span class="map-name">Urchin Underpass</span></div></div>
@@ -343,7 +341,7 @@
     </div>
 
     <div class="round-block">
-      <div class="round-label">Groups Round 3 <span class="bo-tag">Bo5</span></div>
+      <div class="round-label">Round 3 <span class="bo-tag">Bo5</span></div>
       <div class="match"><div class="game-num">1</div><div class="match-info"><span class="mode-tag mode-tc">TC</span><span class="map-name">MakoMart</span></div></div>
       <div class="match"><div class="game-num">2</div><div class="match-info"><span class="mode-tag mode-rm">RM</span><span class="map-name">Museum d'Alfonsino</span></div></div>
       <div class="match"><div class="game-num">3</div><div class="match-info"><span class="mode-tag mode-sz">SZ</span><span class="map-name">Mahi-Mahi Resort</span></div></div>
@@ -352,7 +350,7 @@
     </div>
 
     <div class="round-block">
-      <div class="round-label">Groups Round 4 <span class="bo-tag">Bo5</span></div>
+      <div class="round-label">Round 4 <span class="bo-tag">Bo5</span></div>
       <div class="match"><div class="game-num">1</div><div class="match-info"><span class="mode-tag mode-rm">RM</span><span class="map-name">Undertow Spillway</span></div></div>
       <div class="match"><div class="game-num">2</div><div class="match-info"><span class="mode-tag mode-sz">SZ</span><span class="map-name">Um'ami Ruins</span></div></div>
       <div class="match"><div class="game-num">3</div><div class="match-info"><span class="mode-tag mode-cb">CB</span><span class="map-name">Scorch Gorge</span></div></div>
@@ -364,9 +362,10 @@
   <!-- SILVER STAGE -->
   <div class="stage-block" data-stage="silver">
     <div class="stage-label">Silver Stage</div>
+    <div class="stage-desc">[Round Robin: Best 2 teams from each pool qualify for the Final Four on Day 2]</div>
 
     <div class="round-block">
-      <div class="round-label">Silver Round 1 <span class="bo-tag">Bo5</span></div>
+      <div class="round-label">Round 1 <span class="bo-tag">Bo5</span></div>
       <div class="match"><div class="game-num">1</div><div class="match-info"><span class="mode-tag mode-sz">SZ</span><span class="map-name">Bluefin Depot</span></div></div>
       <div class="match"><div class="game-num">2</div><div class="match-info"><span class="mode-tag mode-tc">TC</span><span class="map-name">Hagglefish Market</span></div></div>
       <div class="match"><div class="game-num">3</div><div class="match-info"><span class="mode-tag mode-rm">RM</span><span class="map-name">Scorch Gorge</span></div></div>
@@ -375,7 +374,7 @@
     </div>
 
     <div class="round-block">
-      <div class="round-label">Silver Round 2 <span class="bo-tag">Bo5</span></div>
+      <div class="round-label">Round 2 <span class="bo-tag">Bo5</span></div>
       <div class="match"><div class="game-num">1</div><div class="match-info"><span class="mode-tag mode-tc">TC</span><span class="map-name">Shipshape Cargo Co.</span></div></div>
       <div class="match"><div class="game-num">2</div><div class="match-info"><span class="mode-tag mode-rm">RM</span><span class="map-name">Museum d'Alfonsino</span></div></div>
       <div class="match"><div class="game-num">3</div><div class="match-info"><span class="mode-tag mode-sz">SZ</span><span class="map-name">Urchin Underpass</span></div></div>
@@ -384,7 +383,7 @@
     </div>
 
     <div class="round-block">
-      <div class="round-label">Silver Round 3 <span class="bo-tag">Bo5</span></div>
+      <div class="round-label">Round 3 <span class="bo-tag">Bo5</span></div>
       <div class="match"><div class="game-num">1</div><div class="match-info"><span class="mode-tag mode-cb">CB</span><span class="map-name">Museum d'Alfonsino</span></div></div>
       <div class="match"><div class="game-num">2</div><div class="match-info"><span class="mode-tag mode-sz">SZ</span><span class="map-name">MakoMart</span></div></div>
       <div class="match"><div class="game-num">3</div><div class="match-info"><span class="mode-tag mode-rm">RM</span><span class="map-name">Undertow Spillway</span></div></div>
@@ -393,7 +392,7 @@
     </div>
 
     <div class="round-block">
-      <div class="round-label">Silver Semifinals <span class="bo-tag">Bo5</span></div>
+      <div class="round-label">Semifinals <span class="bo-tag">Bo5</span></div>
       <div class="match"><div class="game-num">1</div><div class="match-info"><span class="mode-tag mode-sz">SZ</span><span class="map-name">Undertow Spillway</span></div></div>
       <div class="match"><div class="game-num">2</div><div class="match-info"><span class="mode-tag mode-rm">RM</span><span class="map-name">Urchin Underpass</span></div></div>
       <div class="match"><div class="game-num">3</div><div class="match-info"><span class="mode-tag mode-tc">TC</span><span class="map-name">MakoMart</span></div></div>
@@ -402,7 +401,7 @@
     </div>
 
     <div class="round-block">
-      <div class="round-label">Silver Finals / Third Place <span class="bo-tag">Bo5</span></div>
+      <div class="round-label">Finals / Third Place <span class="bo-tag">Bo5</span></div>
       <div class="match"><div class="game-num">1</div><div class="match-info"><span class="mode-tag mode-cb">CB</span><span class="map-name">Museum d'Alfonsino</span></div></div>
       <div class="match"><div class="game-num">2</div><div class="match-info"><span class="mode-tag mode-sz">SZ</span><span class="map-name">Barnacle & Dime</span></div></div>
       <div class="match"><div class="game-num">3</div><div class="match-info"><span class="mode-tag mode-rm">RM</span><span class="map-name">Undertow Spillway</span></div></div>
@@ -414,9 +413,10 @@
   <!-- REDEMPTION STAGE -->
   <div class="stage-block" data-stage="redemption">
     <div class="stage-label">Redemption Stage</div>
+    <div class="stage-desc">[Round Robin, 2 Pools: Best 2 Teams per Pool qualify for the Championship Bracket.]</div>
 
     <div class="round-block">
-      <div class="round-label">Redemption Round 1 <span class="bo-tag">Bo5</span></div>
+      <div class="round-label">Round 1 <span class="bo-tag">Bo5</span></div>
       <div class="match"><div class="game-num">1</div><div class="match-info"><span class="mode-tag mode-sz">SZ</span><span class="map-name">MakoMart</span></div></div>
       <div class="match"><div class="game-num">2</div><div class="match-info"><span class="mode-tag mode-tc">TC</span><span class="map-name">Shipshape Cargo Co.</span></div></div>
       <div class="match"><div class="game-num">3</div><div class="match-info"><span class="mode-tag mode-rm">RM</span><span class="map-name">Museum d'Alfonsino</span></div></div>
@@ -425,7 +425,7 @@
     </div>
 
     <div class="round-block">
-      <div class="round-label">Redemption Round 2 <span class="bo-tag">Bo5</span></div>
+      <div class="round-label">Round 2 <span class="bo-tag">Bo5</span></div>
       <div class="match"><div class="game-num">1</div><div class="match-info"><span class="mode-tag mode-tc">TC</span><span class="map-name">Inkblot Art Academy</span></div></div>
       <div class="match"><div class="game-num">2</div><div class="match-info"><span class="mode-tag mode-rm">RM</span><span class="map-name">Undertow Spillway</span></div></div>
       <div class="match"><div class="game-num">3</div><div class="match-info"><span class="mode-tag mode-sz">SZ</span><span class="map-name">Urchin Underpass</span></div></div>
@@ -434,7 +434,7 @@
     </div>
 
     <div class="round-block">
-      <div class="round-label">Redemption Round 3 <span class="bo-tag">Bo5</span></div>
+      <div class="round-label">Round 3 <span class="bo-tag">Bo5</span></div>
       <div class="match"><div class="game-num">1</div><div class="match-info"><span class="mode-tag mode-cb">CB</span><span class="map-name">Museum d'Alfonsino</span></div></div>
       <div class="match"><div class="game-num">2</div><div class="match-info"><span class="mode-tag mode-sz">SZ</span><span class="map-name">Barnacle & Dime</span></div></div>
       <div class="match"><div class="game-num">3</div><div class="match-info"><span class="mode-tag mode-rm">RM</span><span class="map-name">Scorch Gorge</span></div></div>
@@ -446,6 +446,7 @@
   <!-- CHAMPIONSHIP BRACKET -->
   <div class="stage-block" data-stage="championship">
     <div class="stage-label">Championship Bracket</div>
+    <div class="stage-desc">[The remaining best 8 teams battle it out to crown a champion. Counterpick rules - ]</div>
 
     <div class="round-block">
       <div class="round-label">Winners Quarterfinals <span class="bo-tag">Bo5</span></div>
@@ -532,7 +533,7 @@
 </div>
 
 <div class="footer">
-  Map list subject to chnge · Gridlock 2026 · OSNYC, Chinatown NY
+  Gridlock 2026 · OSNYC, Chinatown NY
 </div>
 
 <script>
