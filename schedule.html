@@ -86,6 +86,43 @@
 
   .meta-pill svg { width: 13px; height: 13px; flex-shrink: 0; color: #00b4e6; }
 
+  /* Nav */
+  .subnav {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-top: 1.25rem;
+  }
+
+  .subnav a {
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    padding: 8px 18px;
+    border-radius: 8px;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .subnav a.active {
+    background: #00b4e6;
+    color: #0a1628;
+    border: 1px solid #00b4e6;
+  }
+
+  .subnav a.inactive {
+    background: rgba(255,255,255,0.05);
+    color: #a8bdd4;
+    border: 1px solid rgba(0,180,230,0.25);
+  }
+
+  .subnav a.inactive:hover {
+    background: rgba(0,180,230,0.12);
+    color: #e8edf5;
+  }
+
   .notice {
     background: rgba(245,197,24,0.08);
     border: 1px solid rgba(245,197,24,0.25);
@@ -215,6 +252,10 @@
       OSNYC, Chinatown, New York
     </div>
   </div>
+  <nav class="subnav">
+    <a href="schedule.html" class="active">Schedule</a>
+    <a href="maplist.html" class="inactive">Map List</a>
+  </nav>
 </div>
 
 <div class="notice">
